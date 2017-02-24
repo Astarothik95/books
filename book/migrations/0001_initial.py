@@ -13,6 +13,13 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
+            name='AuthorBook',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
+                ('author', models.ForeignKey(to='author.Author')),
+            ],
+        ),
+        migrations.CreateModel(
             name='Book',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
@@ -21,7 +28,6 @@ class Migration(migrations.Migration):
                 ('year', models.IntegerField(verbose_name='Год издания', blank=True, default=2017)),
                 ('image', stdimage.models.StdImageField(verbose_name='Изображение', blank=True, upload_to='img/books')),
                 ('wiki_link', models.URLField(verbose_name='Wikipedia', blank=True)),
-                ('author', models.ForeignKey(null=True, default=0, to='author.Author')),
             ],
         ),
         migrations.CreateModel(
@@ -32,9 +38,22 @@ class Migration(migrations.Migration):
                 ('desc_category', models.CharField(verbose_name='Описание категории', max_length=100, blank=True)),
             ],
         ),
+        migrations.CreateModel(
+            name='CategoryBook',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
+                ('book', models.ForeignKey(to='book.Book')),
+                ('category', models.ForeignKey(to='book.Category')),
+            ],
+        ),
         migrations.AddField(
             model_name='book',
             name='category',
-            field=models.ForeignKey(null=True, default=0, to='book.Category'),
+            field=models.ForeignKey(blank=True, null=True, default=0, to='book.Category'),
+        ),
+        migrations.AddField(
+            model_name='authorbook',
+            name='book',
+            field=models.ForeignKey(to='book.Book'),
         ),
     ]

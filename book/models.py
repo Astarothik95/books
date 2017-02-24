@@ -7,8 +7,8 @@ import datetime
 class Book(models.Model):
     title_book = models.CharField('Название книги', max_length=250)
     desc_book = models.TextField('Краткое описание', max_length=255)
-    author = models.ForeignKey('author.Author', null=True, default=0)
     category = models.ForeignKey('Category', null=True, default=0, blank=True)
+    author = models.ForeignKey('author.Author', null=True, default=0, blank=True)
     year = models.IntegerField(
         'Год издания',
         blank=True,
@@ -33,11 +33,3 @@ class Category(models.Model):
 
     def __str__(self):
         return str(self.name_category)
-
-
-class CategoryBook(models.Model):
-    book = models.ForeignKey('Book')
-    category = models.ForeignKey('Category')
-
-    def add(self):
-        self.save()

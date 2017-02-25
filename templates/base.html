@@ -1,10 +1,22 @@
+{% load header %}
+{% load footer %}
+{% load staticfiles %}
+
 <html>
 <head>
     <title>Наши книги</title>
+
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
 </head>
 <body>
+    {% block header %}
+
+    {% endblock header %}
     <div class="container">
 
     </div>
+    {% block footer %}
+
+    {% endblock footer %}
 </body>
 </html>
